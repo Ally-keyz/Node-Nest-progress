@@ -15,7 +15,7 @@ const dotenv = require("dotenv")
         if(existingUser){
             return res.status(400).json({error:"User already exists"});
         }
-        const hashedPassword = bcrypt.hash(password,10);
+        const hashedPassword = await bcrypt.hash(password,10);
         const newUser = await new Admin({
             name,
             title,
