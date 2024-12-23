@@ -93,4 +93,29 @@ router.post("/documents/author/:id",async(req,res)=>{
     }
 })
 
+//delete documents
+
+router.delete("/documents/:id",async(req,res)=>{
+    try {
+        await documents.findByIdAndDelete(req.params.id)
+        res.status(200).json({message:"Deleted success"})
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+})
+
+//updating documents
+router.put("/documents/:id",async(req,res)=>{
+    try {
+        const body = req.body
+        if(!body){
+            return res.status(400).json({error:"All fields are required"})
+        }
+        const updatedDoc = await documents.findByIdAndUpdate(req.params.id,req.body,{new:true});
+        res.status(200).json(updatedDoc)
+    } catch (error) {
+        res.status(500).json({error:error.message})
+    }
+})
+
 module.exports = router

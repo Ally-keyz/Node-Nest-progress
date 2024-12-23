@@ -1,0 +1,14 @@
+{
+  "name": "file-upload",
+  "version": "1.0.0",
+  "description": "file uploading",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "author": "manzi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
