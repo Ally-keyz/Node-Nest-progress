@@ -23,7 +23,7 @@ const dotenv = require("dotenv")
             password:hashedPassword
         })
         const savedUser = await newUser.save()
-        res.status(200).json({message:"User registered",savedUser});
+        res.status(201).json({message:"User registered",savedUser});
     } catch (error) {
         res.status(500).json({error:error.message})
     }

@@ -3,6 +3,31 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/UserModel")
 const bcrypt = require("bcrypt")
+const auth = require("../middleware");
+
+
+//user Login
+
+router.post("/login",async(req,res)=>{
+    try{
+        const {email,password} = req.body;
+        
+        if(!email || !password){
+            return res.status(400).json({error:" Login failed"});
+        }
+
+        const existingUser = await User.find({email:email});
+        if(!existingUser){
+            return res.status(404).json({error:"user not found!"});
+
+        }
+        const passwordUser = existingUser.password;
+         const isMatch = awai
+
+    }catch(error){
+        return res.status(500).json({error:"Internal Server Error"});
+    }
+})
 
 //user  registration
 
