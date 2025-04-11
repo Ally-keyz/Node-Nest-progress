@@ -4,7 +4,7 @@ const Admin = require("../models/AdminModel")
 const bcrypt = require("bcrypt")
 const dotenv = require("dotenv")
 
-   Register = async (req,res)=>{
+const Register = async (req,res)=>{
     
     try {
         const{name,title,email,password} = req.body;
@@ -28,4 +28,4 @@ const dotenv = require("dotenv")
         res.status(500).json({error:error.message})
     }
 }
-module.exports =Register;
+module.exports = Register;

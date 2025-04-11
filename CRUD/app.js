@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const UserRoutes = require("./routes/UserRoutes")
 const AdminRoutes = require("./routes/AdminRoutes")
+const testRoutes = require("./routes/test");
 
 //load environment variables
 dotenv.config();
@@ -13,6 +14,7 @@ dotenv.config();
 app.use(express.json());
 app.use("/user",UserRoutes);
 app.use("/admin",AdminRoutes);
+app.use("/test",testRoutes);
 
 
 // establishing connection
