@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
 const documentShema = new mongoose.Schema({
-    date:{type:Date,default:Date.now()},
-    type:{type:String,required:true},
-    user:{type:mongoose.Types.ObjectId,ref:"User"}
+    name:{type:String,required:true},
+    code:{type:String,required:true},
+    quantityIn:{type:Number,required:true},
+    quantityOut:{type:Number,required:true},
+    balance:{type:Number,required:true}
 });
 
 const documentModel = mongoose.model("Documents",documentShema);
