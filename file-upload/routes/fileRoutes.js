@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
         const uniqueName = `${Date.now}-${file.originalname}`
         cb(null,uniqueName)
     }
-})
+});
 
 //upload multer configure
 
