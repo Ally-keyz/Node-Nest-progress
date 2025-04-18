@@ -1,22 +1,36 @@
-const express = require("express");
-const app  = express();
-const dotenv = require("dotenv");
-const mongoose  = require("mongoose");
-const port  = 5000
+//importation of modules
+const express = require("express")
+const app = express()
+const dotenv = require("dotenv")
+const port = 5000
+const mongoose = require("mongoose")
+const UsersRoutes = require("./routes/userAuth")
+const cors = require("cors")
 
-//load the environment variables
+//enable cors
+app.use(cors())
+
+//intializing env variables
 dotenv.config();
 
-//use express middleware to parse the urls
+// parsing urls
 app.use(express.json());
-//connect to the mongoose database
+app.use("/Users",UsersRoutes);
 
+// connecting to our mongo db
 mongoose.connect(process.env.MONGO_URL)
-.then(()=>console.log("Connected to mongo database"))
-.catch((error)=> console.error(`Error: ${error.message}`));
+.then(()=> console.log("Connected to the mongo database..."))
+.catch((err)=> console.log(`Error: ${err.message}`));
 
-//start the listening port
+
+app.post("/",(req,res)=>{
+    const {name} = req.body;
+    res.send(`Hello ${name}`);
+})
+
+//initialise our server
 app.listen(port,()=>{
-  console.log(`Server is listening on port ${port}`);
+    console.log(`Server listening on ${port}`);
 });
+
 module.exports = app;

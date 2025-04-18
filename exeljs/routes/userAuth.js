@@ -13,13 +13,14 @@ router.post("/register",async(req,res)=>{
     try {
         const {name , email, password} = req.body;
         if(!name || !email || !password){
-            return res.status(400).json({error:"Pleae provide all the fields"});
+            return res.status(400).json({error:"Please provide all the fields"});
         }
         const existingUser = await Users.findOne({email:email});
         if(existingUser){
             return res.status(400).json({error:"User already exist"});
         }
-        const hashedPassword  = bcrypt.hash(password);
+        const hashedPassword  = await bcrypt.hash(password,10)
+        
         const newUser = new Users({
             name:name,
             email:email,
@@ -50,8 +51,10 @@ router.post("/login",async(req,res)=>{
         if(!existingPassword){
             return res.status(500).json({error:"Database comflict"});
         }
-        const matchingPasswords = bcrypt.compare(existingPassword,password);
-        if(!matchingPasswords){
+        
+        const isMatch = await bcrypt.compare(password, existingPassword);
+        console.log(isMatch)
+        if(!isMatch){
             return res.status(403).json({error:"Incorect passwords please try again"})
         }
         const token = jwt.sign({id:existingUser._id,email:existingUser.email},process.env.JWT_KEY,{expiresIn:"1h"});
