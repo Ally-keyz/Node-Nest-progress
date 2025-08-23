@@ -5,7 +5,9 @@ const dotenv = require("dotenv")
 const port = 5000
 const mongoose = require("mongoose")
 const UsersRoutes = require("./routes/userAuth")
+const BookRoutes = require("./routes/booksRoutes")
 const cors = require("cors")
+const path = require("path")
 
 //enable cors
 app.use(cors())
@@ -16,6 +18,8 @@ dotenv.config();
 // parsing urls
 app.use(express.json());
 app.use("/Users",UsersRoutes);
+app.use("/Books",BookRoutes);
+app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 
 // connecting to our mongo db
 mongoose.connect(process.env.MONGO_URL)

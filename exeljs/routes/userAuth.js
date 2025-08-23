@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const Users = require("../models/userModel");
+const Authenticate = require("../middlewares/AuthMiddleware")
 
 //configure the environment variables
 dotenv.config();
@@ -53,7 +54,7 @@ router.post("/login",async(req,res)=>{
         }
         
         const isMatch = await bcrypt.compare(password, existingPassword);
-        console.log(isMatch)
+        
         if(!isMatch){
             return res.status(403).json({error:"Incorect passwords please try again"})
         }
@@ -68,7 +69,7 @@ router.post("/login",async(req,res)=>{
 });
 
 //route for updating users
-router.put("/update/:id",async(req,res)=>{
+router.put("/update/:id",Authenticate,async(req,res)=>{
     try {
         const id  = req.params.id;
         const body  = req.body;
@@ -86,7 +87,7 @@ router.put("/update/:id",async(req,res)=>{
 });
 
 //route for deleting all the users
-router.delete("/delete/:id",async(req,res)=>{
+router.delete("/delete/:id",Authenticate,async(req,res)=>{
     try {
         const id = req.params.id;
         if(!id){

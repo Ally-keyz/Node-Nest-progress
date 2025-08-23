@@ -1,0 +1,1 @@
+{"version":3,"file":"UserSchema.d.ts","sourceRoot":"","sources":["../../src/models/UserSchema.ts"],"names":[],"mappings":"AAAA,OAAiB,EAAC,QAAQ,EAAG,KAAK,EAAC,MAAM,UAAU,CAAC;AACpD,OAAO,EAAE,IAAI,EAAE,MAAM,gBAAgB,CAAC;AAEtC,UAAU,aAAc,SAAQ,IAAI,EAAG,QAAQ;CAAG;AASlD,QAAA,MAAM,SAAS,EAAE,KAAK,CAAC,aAAa,CAAsC,CAAC;AAE3E,eAAe,SAAS,CAAA"}

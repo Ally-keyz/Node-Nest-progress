@@ -1,0 +1,1 @@
+{"version":3,"file":"MessagesSchema.d.ts","sourceRoot":"","sources":["../../src/models/MessagesSchema.ts"],"names":[],"mappings":"AAAA,OAAiB,EAAC,QAAQ,EAAG,KAAK,EAAC,MAAM,UAAU,CAAC;AACpD,OAAO,EAAE,OAAO,EAAE,MAAM,gBAAgB,CAAC;AAGzC,UAAU,gBAAkB,SAAQ,OAAO,EAAG,QAAQ;CAAG;AASzD,QAAA,MAAM,YAAY,EAAG,KAAK,CAAE,gBAAgB,CAA6C,CAAC;AAE1F,eAAe,YAAY,CAAA"}
