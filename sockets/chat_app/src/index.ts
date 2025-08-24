@@ -5,12 +5,12 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import userModel from './models/UserSchema.js'
-import { User } from '../types.js'
+import { clientToServerEvents, serverToClientEvents, User } from '../types.js'
 import messageModel from './models/MessagesSchema.js'
 
 const app = express();
 const server = http.createServer(app)
-const io = new Server(server ,{
+const io = new Server<clientToServerEvents , serverToClientEvents >(server ,{
     cors:{ 
         origin:"*" 
          }
@@ -25,7 +25,7 @@ mongoose.connect('mongodb+srv://manzialpe:loloChat@cluster0.ax8rtc6.mongodb.net/
 .then(()=> console.log('Connected to mongo'))
 .catch((error) => console.error(error.message));
 
-const activeUsers : User[] = [] 
+const activeUsers : User[]  = [] 
 
 // handle socket connections and messaging
 
@@ -50,14 +50,15 @@ io.on('connection',(socket)=>{
             senderId: socket.id,
             content: data.content,
          });
-         io.to(data.receiverId).emit('incoming-message', data.content)
+         io.to(data.receiverId).emit('incoming-message', newMessage)
          console.log(newMessage);
          await newMessage.save();
     });
-    socket.on('typing',(receiverId:string)=>{
-        io.to(receiverId).emit('is_typing',{userId : socket.id})
+    socket.on("typing",(receiverId:string)=>{
+        io.to(receiverId).emit('typing',socket.id)
         console.log('socket user is typing :', socket.id);
     });
+
     socket.on('disconnect',()=>{
         const userIndex = activeUsers.findIndex( u => u.Id === socket.id)
         if (userIndex !== -1){
